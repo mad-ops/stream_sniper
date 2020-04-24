@@ -2,6 +2,7 @@
 # You can read more details at: https://www.junian.net/2017/01/how-to-record-twitch-streams.html
 # original code is from https://slicktechies.com/how-to-watchrecord-twitch-streams-using-livestreamer/
 
+import os
 import time
 import argparse
 import streamlink
@@ -9,6 +10,8 @@ import streamlink
 parser = argparse.ArgumentParser(prog='Sniper',description='Snipe some streams.')
 parser.add_argument('streamer', metavar='u/n', help='username, found in TTV URL')
 args = parser.parse_args()
+
+scriptdir = os.path.dirname(os.path.abspath(__file__))
 
 def findUrl( streamer ):
     # Check for Livestream
@@ -41,8 +44,11 @@ def main( args ):
     except:
         print("Could not open stream.")
         return
-
-    with open(f"{args.streamer}__{pretty_time}.ts", "wsb") as ts:
+    
+    file_name = os.path.join(scriptdir, "Videos", f"{args.streamer}__{pretty_time}.ts")
+    os.makedirs(os.path.join(scriptdir, "Videos"), exist_ok=True)
+    
+    with open(file_name, "wb") as ts:
         while time.time() < timeout_start + timeout:
             data = fd.read(chunkSize)
             ts.write(data)
