@@ -17,9 +17,22 @@ def file_to_encode( streamer ):
     return list(filter(lambda x: bool(streamer in x) & x.endswith("ts"), tsfiles))
 
 def main( args ):
-    vod = file_to_encode(args.streamer)[0]
-    file_name = os.path.basename(vod)
-    ffmpeg.input(vod).output(os.path.join(final_path, file_name)).run()
+    try:
+        vod = file_to_encode(args.streamer)[0]
+    except:
+        print("No files for processing.")
+        return
+
+    file_name = os.path.splitext(os.path.basename(vod))[0]
+    encoded_vod = os.path.join(final_path, file_name + ".mp4")
+
+    try:
+        ffmpeg.input(vod).output(encoded_vod).run()
+    except:
+        os.remove(encoded_vod)
+        return
+    
+    os.remove(vod)
     return
 
 if __name__ == "__main__":
