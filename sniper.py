@@ -1,7 +1,4 @@
-# This code is based on tutorial by slicktechies modified as needed to use oauth token from Twitch.
-# You can read more details at: https://www.junian.net/2017/01/how-to-record-twitch-streams.html
-# original code is from https://slicktechies.com/how-to-watchrecord-twitch-streams-using-livestreamer/
-
+#!/usr/bin/env python
 import os
 import time
 import argparse
