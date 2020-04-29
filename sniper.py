@@ -22,7 +22,7 @@ def findUrl( streamer ):
         print("Stream not found.")
         return
 
-    if "best" not in  streams:
+    if "best" not in streams:
         print("No URLs returned.")
         return
 
@@ -31,6 +31,18 @@ def findUrl( streamer ):
 def file_list( path ,  type ):
     onlyfiles = [os.path.join(path,f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]  
     return list(filter(lambda x: x.endswith(type) , onlyfiles))
+
+def lock_encoder( streamer ):
+    with os.open(f"/tmp/encoder_{streamer}.lck"):
+        return
+
+def unlock_encoder( streamer ):
+    try:
+        os.remove(f"/tmp/encoder_{streamer}.lck")
+    except OSError:
+        pass
+
+    return
 
 def ship_ts( streamer ):
     #should only return 1
@@ -56,8 +68,10 @@ def main( args ):
         print("Could not open stream.")
         #Move file
         ship_ts(args.streamer)
+        unlock_encoder(args.streamer)
         return
-    
+
+    lock_encoder(args.streamer)
     file_name = os.path.join(scriptdir, "Videos", "in_progress", f"{args.streamer}.ts")
     
     with open(file_name, "ab") as ts:
