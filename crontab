@@ -1,3 +1,3 @@
-*   *   *   *   * /usr/bin/flock -w 0 /tmp/sniper_moonmoon.lck /usr/app/sniper.py moonmoon
-*/5 *   *   *   * /usr/bin/flock -w 0 /tmp/encoder_moonmoon.lck /usr/app/encoder.py moonmoon
+*   *   *   *   * /usr/bin/flock -n /tmp/sniper_moonmoon.lck /usr/app/sniper.py moonmoon
+*/5 *   *   *   * /usr/bin/flock -n /tmp/encoder_moonmoon.lck /usr/app/encoder.py moonmoon
 
