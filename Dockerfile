@@ -8,7 +8,6 @@ RUN apt-get install cron
 WORKDIR /usr/
 RUN git clone https://github.com/mad-ops/stream_sniper.git app
 WORKDIR /usr/app
-RUN ls
 
 ###Python Things
 ENV VIRTUAL_ENV=/venv
