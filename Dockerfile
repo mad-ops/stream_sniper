@@ -10,7 +10,7 @@ RUN git clone https://github.com/mad-ops/stream_sniper.git app
 WORKDIR /usr/app
 
 ###Python Things
-ENV VIRTUAL_ENV=/venv
+ENV VIRTUAL_ENV=/usr/app/venv
 RUN python3 -m pip install virtualenv
 RUN python3 -m virtualenv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"

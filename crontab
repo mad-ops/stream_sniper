@@ -1,3 +1,3 @@
-*   *   *   *   * /usr/bin/flock -n /tmp/sniper_moonmoon.lck /usr/app/sniper.py moonmoon > /usr/app/Videos/backup.log 2>&1
-*/5 *   *   *   * /usr/bin/flock -n /tmp/encoder_moonmoon.lck /usr/app/encoder.py moonmoon > /usr/app/Videos/backup.log 2>&1
+*   *   *   *   * /usr/bin/flock -n /tmp/sniper_moonmoon.lck  source /usr/app/venv/bin/activate && /usr/app/sniper.py  moonmoon > /usr/app/Videos/backup.log 2>&1
+*/5 *   *   *   * /usr/bin/flock -n /tmp/encoder_moonmoon.lck source /usr/app/venv/bin/activate && /usr/app/encoder.py moonmoon > /usr/app/Videos/backup.log 2>&1
 
