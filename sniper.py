@@ -33,8 +33,8 @@ def file_list( path ,  type ):
     return list(filter(lambda x: x.endswith(type) , onlyfiles))
 
 def lock_encoder( streamer ):
-    with open(f"/tmp/encoder_{streamer}.lck", 'a'):
-        return
+    open(f"/tmp/encoder_{streamer}.lck", 'a').close()
+
 
 def unlock_encoder( streamer ):
     try:
