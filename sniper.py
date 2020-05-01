@@ -60,7 +60,7 @@ def main( args ):
 
     # lets only run for 15 minutes at a time -- cause im scared
     timeout_start = time.time()
-    timeout = 1 * 60
+    timeout = 15
     
     try:
         fd = url.open()
