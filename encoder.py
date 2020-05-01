@@ -30,7 +30,7 @@ def main( args ):
     try:
         ffmpeg.input(vod).output(encoded_vod).run()
     except:
-        os.remove(encoded_vod)
+        print(f"File not found @ {file_name}")
         return
 
     print("Raw enconded.")

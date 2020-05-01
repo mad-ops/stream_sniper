@@ -60,7 +60,7 @@ def main( args ):
 
     # lets only run for 15 minutes at a time -- cause im scared
     timeout_start = time.time()
-    timeout = 15
+    timeout = 15 * 60
     
     try:
         fd = url.open()
@@ -70,8 +70,6 @@ def main( args ):
         ship_ts(args.streamer)
         unlock_encoder(args.streamer)
         return
-
-    ship_ts(args.streamer)
 
     print("Lock encoder.")
     lock_encoder(args.streamer)
