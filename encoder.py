@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/app/venv/bin/python
 import os
 import argparse
 import ffmpeg
