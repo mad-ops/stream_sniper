@@ -71,6 +71,7 @@ def main( args ):
         unlock_encoder(args.streamer)
         return
 
+    print("Lock encoder.")
     lock_encoder(args.streamer)
     file_name = os.path.join(scriptdir, "Videos", "in_progress", f"{args.streamer}.ts")
     
@@ -80,6 +81,7 @@ def main( args ):
             ts.write(data)
 
     fd.close
+    print("Stream sniped.")
 
 if __name__ == "__main__":
     main(args)

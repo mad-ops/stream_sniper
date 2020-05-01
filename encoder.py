@@ -32,7 +32,8 @@ def main( args ):
     except:
         os.remove(encoded_vod)
         return
-    
+
+    print("Raw enconded.")
     os.remove(vod)
     return
 
