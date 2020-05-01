@@ -85,5 +85,3 @@ def main( args ):
 
 if __name__ == "__main__":
     main(args)
-
-#oh shit use a lockfile so i don't dl and encode at the same time
