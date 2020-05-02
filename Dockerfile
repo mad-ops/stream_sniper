@@ -3,6 +3,7 @@ FROM balenalib/raspberry-pi-debian-python:3.7-latest-build AS base
 RUN apt-get update
 RUN apt-get install -y git
 RUN apt-get install cron
+RUN apt-get install ffmpeg
 
 ###Git Things
 WORKDIR /usr/

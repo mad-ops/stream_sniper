@@ -33,9 +33,10 @@ def main( args ):
         print(f"File not found @ {file_name}")
         return
 
-    print("Raw enconded.")
+    print("Raw encoded.")
     os.remove(vod)
     return
 
 if __name__ == "__main__":
     main(args)
+    return

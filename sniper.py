@@ -82,6 +82,8 @@ def main( args ):
 
     fd.close
     print("Stream sniped.")
+    return
 
 if __name__ == "__main__":
     main(args)
+    return
