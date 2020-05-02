@@ -24,7 +24,7 @@ def main( args ):
         print("No files for processing.")
         return
 
-    file_name = os.path.splitext(os.path.basename(vod))[0]
+    file_name = os.path.splitext(os.path.basename(vod))[0] + ".ts"
     encoded_vod = os.path.join(final_path, file_name + ".mp4")
 
     try:
