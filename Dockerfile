@@ -5,8 +5,9 @@ RUN apt-get install -y git
 RUN apt-get install cron
 
 ###Git Things
+WORKDIR /usr/
+RUN git clone https://github.com/mad-ops/stream_sniper.git app
 WORKDIR /usr/app
-RUN git pull
 
 ###Python Things
 ENV VIRTUAL_ENV=/usr/app/venv
