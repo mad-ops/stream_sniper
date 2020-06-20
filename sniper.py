@@ -1,5 +1,6 @@
-#!/usr/app/venv/bin/python
-import os
+#!/usr/bin/env python3
+from os import makedirs, listdir, rename, remove
+from os import path
 import time
 import argparse
 import streamlink
@@ -8,11 +9,11 @@ parser = argparse.ArgumentParser(prog='Sniper',description='Snipe some streams.'
 parser.add_argument('streamer', metavar='u/n', help='username, found in TTV URL')
 args = parser.parse_args()
 
-scriptdir = os.path.dirname(os.path.abspath(__file__))
-os.makedirs(os.path.join(scriptdir, "Videos", "in_progress"), exist_ok=True)
-os.makedirs(os.path.join(scriptdir, "Videos", "encode_ready"), exist_ok=True)
-encode_path = os.path.join(scriptdir, "Videos", "encode_ready")
-capture_path = os.path.join(scriptdir, "Videos", "in_progress")
+capture_path = path.join("~", "Videos", "in_progress")
+encode_path = path.join("~", "Videos", "encode_ready")
+makedirs(capture_path, exist_ok=True)
+makedirs(encode_path, exist_ok=True)
+
 
 def findUrl( streamer ):
     # Check for Livestream
@@ -29,7 +30,7 @@ def findUrl( streamer ):
     return streams["best"]
 
 def file_list( path ,  type ):
-    onlyfiles = [os.path.join(path,f) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]  
+    onlyfiles = [path.join(path,f) for f in listdir(path) if path.isfile(path.join(path, f))]  
     return list(filter(lambda x: x.endswith(type) , onlyfiles))
 
 def lock_encoder( streamer ):
@@ -38,7 +39,7 @@ def lock_encoder( streamer ):
 
 def unlock_encoder( streamer ):
     try:
-        os.remove(f"/tmp/encoder_{streamer}.lck")
+        remove(f"/tmp/encoder_{streamer}.lck")
     except:
         pass
 
@@ -48,7 +49,7 @@ def ship_ts( streamer ):
     #should only return 1
     vods = [f for f in file_list(capture_path, ".ts") if streamer in f]
     pretty_time = time.strftime("%Y-%m-%d-%H")
-    [os.rename(vod, os.path.join(encode_path, f"{args.streamer}_{pretty_time}.ts") ) for vod in vods]
+    [rename(vod, path.join(encode_path, f"{args.streamer}_{pretty_time}.ts") ) for vod in vods]
     return
 
 def main( args ):
@@ -73,7 +74,7 @@ def main( args ):
 
     print("Lock encoder.")
     lock_encoder(args.streamer)
-    file_name = os.path.join(scriptdir, "Videos", "in_progress", f"{args.streamer}.ts")
+    file_name = path.join(capture_path, f"{args.streamer}.ts")
     
     with open(file_name, "ab") as ts:
         while time.time() < timeout_start + timeout:
