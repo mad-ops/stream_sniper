@@ -9,18 +9,18 @@ parser = argparse.ArgumentParser(prog='Sniper',description='Snipe some streams.'
 parser.add_argument('streamer', metavar='u/n', help='username, found in TTV URL')
 args = parser.parse_args()
 
-capture_path = path.join("~", "Videos", "in_progress")
-encode_path = path.join("~", "Videos", "encode_ready")
+home = path.expanduser("~")
+capture_path = path.join(home, "Videos", "in_progress")
+encode_path = path.join(home, "Videos", "encode_ready")
 makedirs(capture_path, exist_ok=True)
 makedirs(encode_path, exist_ok=True)
-
 
 def findUrl( streamer ):
     # Check for Livestream
     if str.isnumeric(streamer):
-        stream_url = f"https://www.twitch.tv/videos/{ streamer }/"
+        stream_url = f"https://www.twitch.tv/videos/{ streamer }"
     else:
-        stream_url = f"https://www.twitch.tv/{ streamer }/"
+        stream_url = f"https://www.twitch.tv/{ streamer }"
     try:
         streams = streamlink.streams(stream_url)
     except:
