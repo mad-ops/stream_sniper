@@ -17,8 +17,12 @@ makedirs(encode_path, exist_ok=True)
 
 def findUrl( streamer ):
     # Check for Livestream
+    if str.isnumeric(streamer):
+        stream_url = f"https://www.twitch.tv/videos/{ streamer }/"
+    else:
+        stream_url = f"https://www.twitch.tv/{ streamer }/"
     try:
-        streams = streamlink.streams(f"https://www.twitch.tv/{ streamer }/")
+        streams = streamlink.streams(stream_url)
     except:
         print("Stream not found.")
         return
