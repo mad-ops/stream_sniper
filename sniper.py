@@ -40,7 +40,6 @@ def file_list( path ,  type ):
 def lock_encoder( streamer ):
     open(f"/tmp/encoder_{streamer}.lck", 'a').close()
 
-
 def unlock_encoder( streamer ):
     try:
         remove(f"/tmp/encoder_{streamer}.lck")
@@ -63,10 +62,6 @@ def main( args ):
     # I should also confirm the size of a frame
     chunkSize = 1920 * 1080 *  3  # read length*width*3 bytes (= 1 frame)
 
-    # lets only run for 15 minutes at a time -- cause im scared
-    timeout_start = time.time()
-    timeout = 15 * 60
-    
     try:
         fd = url.open()
     except:
@@ -81,8 +76,10 @@ def main( args ):
     file_name = path.join(capture_path, f"{args.streamer}.ts")
     
     with open(file_name, "ab") as ts:
-        while time.time() < timeout_start + timeout:
+        while True:
             data = fd.read(chunkSize)
+            if not data:
+                break
             ts.write(data)
 
     fd.close
