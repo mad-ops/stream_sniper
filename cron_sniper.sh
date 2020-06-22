@@ -5,5 +5,5 @@ STREAMER=$2
 
 cd $1
 # Activate python env
-source "./.venv/bin/activate".
+ . ".venv/bin/activate"
 ./sniper.py $2 >> sniper.log 2>&1
