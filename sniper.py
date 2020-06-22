@@ -33,8 +33,8 @@ def findUrl( streamer ):
 
     return streams["best"]
 
-def file_list( path ,  type ):
-    onlyfiles = [path.join(path,f) for f in listdir(path) if path.isfile(path.join(path, f))]  
+def file_list( loc ,  type ):
+    onlyfiles = [path.join(loc,f) for f in listdir(loc) if path.isfile(path.join(loc, f))]
     return list(filter(lambda x: x.endswith(type) , onlyfiles))
 
 def lock_encoder( streamer ):
